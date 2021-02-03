@@ -13,8 +13,9 @@ class AddProductController
     public function addProduct(): void
     {
         $_POST=array_filter($_POST);
-        var_dump($_POST);die();
-        /*(new AddProductService())->executeService();*/
+        var_dump($_POST);
+        (new AddProductService())->executeService();
+
         header('Location: /product/add');
     }
 }

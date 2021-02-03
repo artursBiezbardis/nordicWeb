@@ -15,14 +15,14 @@ class AddProductRepository
                 'sku' => ':sku',
                 'name' => ':name',
                 'price' => ':price',
-                'attribute' => ':attribute',
+                'description' => ':description',
             ])
             ->setParameters([
 
                 'sku' => $_POST['sku'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
-                'attribute' => $_POST['attribute']
+                'description' => $_POST['dvdSize']
             ])
             ->execute();
     }
