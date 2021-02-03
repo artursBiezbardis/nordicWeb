@@ -19,9 +19,9 @@ class Book extends Product implements DescriptionInterface
     {
         return ['Weight (KG)'];
     }
-    public function formattingProductDescription(): array
+    public function formattingProductDescription($arrayOfDescriptionValues): string
     {
-        return ['Weight: ',''];
+        return 'Weight: '.$arrayOfDescriptionValues['bookWeight'].' Kg';
     }
 
     function typeDescription(): string

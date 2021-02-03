@@ -7,7 +7,7 @@ use App\Repositories\AddProductRepository;
 
 class AddProductService
 {
-    public function executeService(): void
+    public function executeService()
     {
         (new AddProductRepository())->add();
     }

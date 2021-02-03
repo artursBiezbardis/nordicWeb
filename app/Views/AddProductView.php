@@ -34,7 +34,7 @@ require_once 'app/TypeModelCollection.php';
         </div>
     </div>
 </header>
-<form action="/product/add" method="post" id="form" onsubmit="productTypeInputValidationJS()">
+<form action="/product/add" method="post" id="form" onsubmit="productTypeInputValidationJS();validateSku()">
     <div class="mx-16 pt-16 w-96">
 
         <div class="flex justify-between pb-5">
@@ -102,6 +102,21 @@ require_once 'app/TypeModelCollection.php';
     <?php
     echo Js::validateEachProductAttributeInputField($typeModels);
     ?>
+
+    function validateSku(){
+
+        const skuFromDb = <?php echo json_encode($_GET); ?>;
+        const skuFormValue = document.forms["form"]["sku"].value
+
+        for(let i=0; i<skuFromDb.length; i++){
+            if(skuFromDb[i]===skuFormValue){
+                alert('This SKU number exists in Data Base!!');
+                event.preventDefault();
+                return false;
+            }
+
+        }
+    }
 </script>
 </body>
 </html>

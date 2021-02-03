@@ -17,9 +17,9 @@ class DVD extends Product implements DescriptionInterface
     {
         return ['Size (Mb)'];
     }
-    public function formattingProductDescription(): array
+    public function formattingProductDescription($arrayOfDescriptionValues): string
     {
-        return ['Size: ',''];
+        return 'Weight: '.$arrayOfDescriptionValues['dvdSize'].' Mb';
     }
 
     public function typeDescription(): string

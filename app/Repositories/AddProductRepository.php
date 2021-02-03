@@ -22,7 +22,7 @@ class AddProductRepository
                 'sku' => $_POST['sku'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
-                'description' => $_POST['dvdSize']
+                'description' => $_POST['description']
             ])
             ->execute();
     }
