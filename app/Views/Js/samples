@@ -1,0 +1,18 @@
+<html>
+<body>
+//Paraugs kā pievienot vērtību no viena vai vairākiem inputiem uz  citu inputu
+<p>Write something in the text field to trigger a function.</p>
+
+<input type="text" id="myInput" oninput="myFunction()">
+
+<input type="text" id="demo">
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput").value;
+  document.getElementById("demo").value = "You wrote: " + x;
+}
+</script>
+
+</body>
+</html>
