@@ -30,5 +30,10 @@ class HelperMethods
 
         return $name[0];
     }
+    static function formatTypeForHtmlInput($model,$input):string
+    {
+      return strtolower(($model->getProductType())).(HelperMethods::getPropertyNameForHtmlInput($input));
+
+    }
 }
 

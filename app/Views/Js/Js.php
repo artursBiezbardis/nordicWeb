@@ -64,11 +64,11 @@ class Js
             $script .= "\t" . "\t" . "\t" . '},' . "\n" . "\n" . "\t";
 
         }
-        $script .= "\t" . "\t" . 'empty : function () {' . "\n".
-        'const weight = document.forms["form"]["inWeight"].value;
+        $script .= "\t" . "\t" . 'empty : function () {' . "\n" .
+            'const weight = document.forms["form"]["bookWeight"].value;
 				let stringWeight = weight.toString();
 				if( stringWeight === "" ) {
-				alert("Name must be filled out");
+				alert("Select product type");
 				event.preventDefault();
 				return false;
 				}
@@ -87,16 +87,21 @@ class Js
         $jsVar = '';
         foreach ($model->descriptionFormValues() as $input) {
             $input = HelperMethods::getPropertyNameForHtmlInput($input);
-            $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'const ' . strtolower($input) . ' = document.forms["form"]["in' . $input . '"].value;';
+            $forId = HelperMethods::formatTypeForHtmlInput($model, $input);
+
+            $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'const ' .
+                strtolower($input) . ' = document.forms["form"]["'
+                . $forId . '"].value;';
         }
         foreach ($model->descriptionFormValues() as $input) {
             $input = HelperMethods::getPropertyNameForHtmlInput($input);
-            $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'let string' . $input . ' = ' . strtolower($input) . '.toString();';
+            $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'let string' . $input . ' = ' .
+                strtolower($input) . '.toString();';
         }
         foreach ($model->descriptionFormValues() as $input) {
             $input = HelperMethods::getPropertyNameForHtmlInput($input);
             $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'if( string' . $input . ' === "" ) {' . "\n" .
-                "\t" . "\t" . "\t" . "\t" . 'alert("'.$input.' must be filled");' .
+                "\t" . "\t" . "\t" . "\t" . 'alert("' . $input . ' must be filled");' .
                 "\n" . "\t" . "\t" . "\t" . "\t" . 'event.preventDefault();' .
                 "\n" . "\t" . "\t" . "\t" . "\t" . 'return false;' .
                 "\n" . "\t" . "\t" . "\t" . "\t" . '}';

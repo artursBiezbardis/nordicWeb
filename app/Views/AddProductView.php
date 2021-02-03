@@ -71,13 +71,14 @@ require_once 'app/TypeModelCollection.php';
     <?php foreach ($typeModels as $model): ?>
         <div id="<?php echo $model->getProductType() ?>" class="p-5 border border-black box-border rounded-sm hidden">
 
-            <?php foreach ($model->descriptionFormValues() as $input): ?>
-
+            <?php foreach ($model->descriptionFormValues() as $input):
+            $inputModelName=strtolower(($model->getProductType())).(HelperMethods::getPropertyNameForHtmlInput($input));
+            ?>
             <div class="block flex justify-between pb-5">
-                <label for="<?php echo 'in' . HelperMethods::getPropertyNameForHtmlInput($input) ?>"><?php echo $input ?></label>
+                <label for="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input)?>"><?php echo $input ?></label>
                 <input class=" border border-black " type="number"
-                       id="<?php echo 'in' . HelperMethods::getPropertyNameForHtmlInput($input) ?>
-                            " name="<?php echo 'in' . HelperMethods::getPropertyNameForHtmlInput($input) ?>">
+                       id="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input);?>"
+                       name="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input)?>">
             </div>
             <span>
                 <?php endforeach; ?>

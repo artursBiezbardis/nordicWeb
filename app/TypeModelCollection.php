@@ -7,5 +7,6 @@ $typeModels=
         'Book'=>new Book(),
         'DVD'=>new DVD(),
         'Furniture'=>new Furniture(),
+        'Furniture2'=>new Furniture2(),
 
 ];
