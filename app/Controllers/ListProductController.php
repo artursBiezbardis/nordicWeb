@@ -3,15 +3,14 @@ namespace App\Controllers;
 
 use App\Services\AddProductService;
 use App\Services\GetAllSkuService;
-class AddProductController
+class ListProductController
 {
-    public function showAddProductForm():string
+    public function index():string
     {
 
-        $_GET=(new GetAllSkuService())->executeService();
 
 
-        return require_once __DIR__ . '/../Views/AddProductView.php';
+        return require_once __DIR__ . '/../Views/ListProductView.php';
     }
 
     public function addProduct(): void

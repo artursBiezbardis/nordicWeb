@@ -29,7 +29,7 @@ require_once 'app/TypeModelCollection.php';
         </div>
 
         <div class="pl-5">
-            <a class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
+            <a href="http://localhost:8000/product/list" class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
                role="button">cancel</a>
         </div>
     </div>

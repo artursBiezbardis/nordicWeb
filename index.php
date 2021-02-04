@@ -43,8 +43,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/product/add', $namespace . 'AddProductController@showAddProductForm');
     $r->addRoute('POST', '/product/add', $namespace . 'AddProductController@addProduct');
 
-    $r->addRoute('GET', '/product/list', $namespace . 'ListController@index');
-    $r->addRoute('DELETE', '/product/list/{id}', $namespace . 'ListController@delete');
+    $r->addRoute('GET', '/product/list', $namespace . 'ListProductController@index');
+    $r->addRoute('DELETE', '/product/list/', $namespace . 'ListProductController@massDelete');
 
 
     /*$r->addRoute('GET', '/articles', $namespace . 'ArticlesController@index');
