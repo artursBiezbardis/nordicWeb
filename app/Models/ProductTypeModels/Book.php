@@ -6,12 +6,13 @@ namespace App\Models\ProductTypeModels;
 
 use App\Models\Product;
 use App\Models\ProductTypeInterface;
+
 class Book extends Product implements ProductTypeInterface
 {
 
     public function getProductType(): string
     {
-        $getType=explode('\\',get_class());
+        $getType = explode('\\', get_class());
         return end($getType);
     }
 
@@ -19,9 +20,10 @@ class Book extends Product implements ProductTypeInterface
     {
         return ['Weight (KG)'];
     }
+
     public function formattingProductDescription($arrayOfDescriptionValues): string
     {
-        return 'Weight: '.$arrayOfDescriptionValues['bookWeight'].'Kg';
+        return 'Weight: ' . $arrayOfDescriptionValues['bookWeight'] . 'Kg';
     }
 
     function typeDescription(): string

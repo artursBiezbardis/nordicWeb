@@ -4,10 +4,12 @@
 namespace App\Services;
 
 use App\Repositories\ListProductRepository;
+
 class ListProductService
 {
-function execute(){
+    function execute()
+    {
 
-    return (new ListProductRepository())->execute();
-}
+        return (new ListProductRepository())->execute();
+    }
 }

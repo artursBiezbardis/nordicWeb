@@ -10,44 +10,46 @@
 <body class="flex flex-col h-screen">
 <header class="flex justify-between border-1 border-black border-b mx-16 pt-16 mb-5">
     <div class="pb-2">
-        <h1 class="font-sans  text-3xl ml-5" >Product List</h1>
+        <h1 class="font-sans  text-3xl ml-5">Product List</h1>
     </div>
     <div class="mr-5 flex justify-between">
         <div class="pl-5">
-            <a href="http://localhost:8000/product/add" class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
+            <a href="http://localhost:8000/product/add"
+               class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
                role="button">add</a>
         </div>
 
         <div class="flex justify-between">
             <div class="pb-2 pl-5">
-                <button form="formList" id="massDeleteButton"
+                <button form="formList" id="massDeleteButton" onsubmit="return confirm('Are you sure?')"
                         class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow shadow-md"
                         role="button">mass delete
                 </button>
             </div>
-    </div>
+        </div>
 </header>
 <form action="/product/list" method="post" id="formList" onsubmit="">
 
     <div class="px-16  flex justify-center flex-wrap content-around ">
-        <?php foreach($productList as $product): ?>
+        <?php foreach ($productList as $product): ?>
 
-        <div class="text-sm box-border border border-black w-52 h-40 rounded-sm  mx-3  my-5">
-            <input class="mt-2 ml-2" type="checkbox" id="<?php echo $product->getSku(); ?>" name="" value="">
-            <div class="flex justify-center ">
-                <?php echo $product->getSku();  ?>
-            </div>
-            <div class="flex justify-center col-start">
-                <?php echo $product->getName();  ?>
-            </div>
-            <div class="flex justify-center col-start">
-                <?php echo $product->getPrice()." $";  ?>
-            </div>
-            <div class="flex justify-center col-start">
-                <?php echo $product->getDescription();  ?>
-            </div>
+            <div class="text-sm box-border border border-black w-52 h-40 rounded-sm  mx-3  my-5">
+                <input class="mt-2 ml-2" type="checkbox" id="<?php echo $product->getSku(); ?>"
+                       name="<?php echo $product->getSku(); ?>" value="<?php echo $product->getSku(); ?>">
+                <div class="flex justify-center ">
+                    <?php echo $product->getSku(); ?>
+                </div>
+                <div class="flex justify-center col-start">
+                    <?php echo $product->getName(); ?>
+                </div>
+                <div class="flex justify-center col-start">
+                    <?php echo $product->getPrice() . " $"; ?>
+                </div>
+                <div class="flex justify-center col-start">
+                    <?php echo $product->getDescription(); ?>
+                </div>
 
-        </div>
+            </div>
         <?php endforeach; ?>
 
 

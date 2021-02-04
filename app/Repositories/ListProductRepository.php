@@ -7,7 +7,8 @@ namespace App\Repositories;
 class ListProductRepository
 {
 
-    public function execute(){
+    public function execute()
+    {
         return query()
             ->select('*')
             ->from('products')
@@ -15,4 +16,6 @@ class ListProductRepository
             ->execute()
             ->fetchAllAssociative();
     }
+
+
 }

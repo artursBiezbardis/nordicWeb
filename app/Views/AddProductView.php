@@ -29,7 +29,8 @@ require_once 'app/TypeModelCollection.php';
         </div>
 
         <div class="pl-5">
-            <a href="http://localhost:8000/product/list" class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
+            <a href="http://localhost:8000/product/list"
+               class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
                role="button">cancel</a>
         </div>
     </div>
@@ -55,7 +56,8 @@ require_once 'app/TypeModelCollection.php';
 
         <div class="flex justify-between pb-5">
             <label for="selectType">Type Switcher</label>
-            <select class="border border-black" name="select" id="selectType" onchange="productTypeSwitchJS();" required>
+            <select class="border border-black" name="select" id="selectType" onchange="productTypeSwitchJS();"
+                    required>
                 <option class="text-gray-400 font-extralight" value="empty">Switch Type...</option>
                 <?php foreach ($typeModels as $type => $model): ?>
                     <option value="<?php echo $type ?>"><?php echo $type ?></option>
@@ -67,28 +69,29 @@ require_once 'app/TypeModelCollection.php';
     </div>
 
 
-<div style="width: 450px" class=" mx-16 pt-16 ">
-    <?php foreach ($typeModels as $model): ?>
-        <div id="<?php echo $model->getProductType() ?>" class="p-5 border border-black box-border rounded-sm hidden">
+    <div style="width: 450px" class=" mx-16 pt-16 ">
+        <?php foreach ($typeModels as $model): ?>
+            <div id="<?php echo $model->getProductType() ?>"
+                 class="p-5 border border-black box-border rounded-sm hidden">
 
-            <?php foreach ($model->descriptionFormValues() as $input):
-            $inputModelName=strtolower(($model->getProductType())).(HelperMethods::getPropertyNameForHtmlInput($input));
-            ?>
-            <div class="block flex justify-between pb-5">
-                <label for="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input)?>"><?php echo $input ?></label>
-                <input class=" border border-black " type="number"
-                       id="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input);?>"
-                       name="<?php echo HelperMethods::formatTypeForHtmlInput($model,$input)?>">
-            </div>
-            <span>
+                <?php foreach ($model->descriptionFormValues() as $input):
+                $inputModelName = strtolower(($model->getProductType())) . (HelperMethods::getPropertyNameForHtmlInput($input));
+                ?>
+                <div class="block flex justify-between pb-5">
+                    <label for="<?php echo HelperMethods::formatTypeForHtmlInput($model, $input) ?>"><?php echo $input ?></label>
+                    <input class=" border border-black " type="number"
+                           id="<?php echo HelperMethods::formatTypeForHtmlInput($model, $input); ?>"
+                           name="<?php echo HelperMethods::formatTypeForHtmlInput($model, $input) ?>">
+                </div>
+                <span>
                 <?php endforeach; ?>
 
                 <a class="font-light"><?php echo $model->typeDescription() ?></a>
 
-        </div>
-    <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
 
-</div>
+    </div>
 </form>
 
 <div class="flex-grow "></div>
@@ -103,13 +106,13 @@ require_once 'app/TypeModelCollection.php';
     echo Js::validateEachProductAttributeInputField($typeModels);
     ?>
 
-    function validateSku(){
+    function validateSku() {
 
         const skuFromDb = <?php echo json_encode($skuArray); ?>;
         const skuFormValue = document.forms["form"]["sku"].value
 
-        for(let i=0; i<skuFromDb.length; i++){
-            if(skuFromDb[i]===skuFormValue){
+        for (let i = 0; i < skuFromDb.length; i++) {
+            if (skuFromDb[i] === skuFormValue) {
                 alert('This SKU number exists in Data Base!!');
                 event.preventDefault();
                 return false;

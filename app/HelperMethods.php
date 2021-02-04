@@ -4,7 +4,6 @@
 namespace App;
 
 
-
 class HelperMethods
 {
 
@@ -23,17 +22,18 @@ class HelperMethods
         return $productTypes;
     }
 
+    static function formatTypeForHtmlInput($model, $input): string
+    {
+        return strtolower(($model->getProductType())) . (HelperMethods::getPropertyNameForHtmlInput($input));
+
+    }
+
     static function getPropertyNameForHtmlInput($input): string
     {
 
-        $name = explode(' ',$input);
+        $name = explode(' ', $input);
 
         return $name[0];
-    }
-    static function formatTypeForHtmlInput($model,$input):string
-    {
-      return strtolower(($model->getProductType())).(HelperMethods::getPropertyNameForHtmlInput($input));
-
     }
 }
 

@@ -14,6 +14,6 @@ class GetAllSkuRepository
             ->execute()
             ->fetchFirstColumn();
 
-        }
-
     }
+
+}

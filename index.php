@@ -1,17 +1,14 @@
 <?php
+
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 
-ini_set('xdebug.var_display_max_depth', '10');
-ini_set('xdebug.var_display_max_children', '256');
-ini_set('xdebug.var_display_max_data', '1024');
 require_once 'vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
 
 function database(): Connection
 {
@@ -34,9 +31,6 @@ function query(): QueryBuilder
     return database()->createQueryBuilder();
 }
 
-
-
-//var_dump($_POST);
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $namespace = '\App\Controllers\\';
 
@@ -44,31 +38,13 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/product/add', $namespace . 'AddProductController@addProduct');
 
     $r->addRoute('GET', '/product/list', $namespace . 'ListProductController@listProducts');
-    $r->addRoute('DELETE', '/product/list/', $namespace . 'ListProductController@massDelete');
+    $r->addRoute('POST', '/product/list', $namespace . 'ListProductController@massDelete');
 
-
-    /*$r->addRoute('GET', '/articles', $namespace . 'ArticlesController@index');
-    $r->addRoute('GET', '/articles/{id}', $namespace . 'ArticlesController@show');
-    $r->addRoute('DELETE', '/articles/{id}', $namespace . 'ArticlesController@delete');
-
-    $r->addRoute('GET', '/add', $namespace . 'AddArticleController@showAddArticleForm');
-    $r->addRoute('POST', '/add', $namespace . 'AddArticleController@add');
-
-    $r->addRoute('POST', '/articles/{id}/comments', $namespace . 'CommentsController@store');
-
-
-    $r->addRoute('GET', '/register', $namespace . 'RegisterController@showRegistrationForm');
-    $r->addRoute('POST', '/register', $namespace . 'RegisterController@register');
-
-    $r->addRoute('GET', '/login', $namespace . 'LoginController@showLoginForm');
-    $r->addRoute('POST', '/login', $namespace . 'LoginController@login');
-    $r->addRoute('POST', '/logout', $namespace . 'LoginController@logout');*/
 });
 
 // Fetch method and URI from somewhere
 $httpMethod = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
-
 // Strip query string (?foo=bar) and decode URI
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);

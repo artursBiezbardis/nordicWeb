@@ -1,16 +1,19 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\ProductChildModel\ProductChild;
+use App\Services\ListProductDeleteService;
 use App\Services\ListProductService;
+
 class ListProductController
 {
     public function listProducts()
     {
-        $products= (new ListProductService())->execute();
-        $productList=[];
-        foreach ($products as $product){
-            $productList[$product['sku']]= new ProductChild(
+        $products = (new ListProductService())->execute();
+        $productList = [];
+        foreach ($products as $product) {
+            $productList[$product['sku']] = new ProductChild(
                 $product['sku'],
                 $product['name'],
                 (int)$product['price'],
@@ -22,12 +25,10 @@ class ListProductController
 
     public function massDelete(): void
     {
-        var_dump($_POST);die();
-        require_once 'app/TypeModelCollection.php';
+        foreach ($_POST as $sku) {
 
-
-        (new MassDeleteService())->executeService();
-
+            (new ListProductDeleteService())->execute($sku);
+        }
         header('Location: /product/list');
     }
 }

@@ -24,9 +24,9 @@ class Furniture extends Product implements ProductTypeInterface
     public function formattingProductDescription($arrayOfDescriptionValues): string
     {
         return 'Dimensions: '
-            . $arrayOfDescriptionValues['furnitureHeight'] .'x'
-            . $arrayOfDescriptionValues['furnitureWidth'] .'x'
-            . $arrayOfDescriptionValues['furnitureLength'] ;
+            . $arrayOfDescriptionValues['furnitureHeight'] . 'x'
+            . $arrayOfDescriptionValues['furnitureWidth'] . 'x'
+            . $arrayOfDescriptionValues['furnitureLength'];
     }
 
     public function typeDescription(): string

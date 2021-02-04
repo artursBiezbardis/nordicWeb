@@ -7,7 +7,7 @@ namespace App\Repositories;
 class AddProductRepository
 {
 
-    public function add($model):void
+    public function add($model): void
     {
         query()
             ->insert('products')

@@ -1,35 +1,35 @@
 <?php
 
 
+
+
 namespace App;
+
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 
-class ConnectionToDB
+
+
+function database(): Connection
 {
- static function connectToDB(): Connection
- {
+    $connectionParams = [
+        'dbname' => $_ENV['DB_DATABASE'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+        'host' => $_ENV['DB_HOST'],
+        'driver' => 'pdo_mysql',
+    ];
 
-     $connectionParams = array(
-         'dbname' => 'mydb',
-         'user' => 'user',
-         'password' => 'secret',
-         'host' => 'localhost',
-         'driver' => 'pdo_mysql',
-     );
-     $connection = DriverManager::getConnection($connectionParams);
-     $connection->connect();
+    $connection = DriverManager::getConnection($connectionParams);
+    $connection->connect();
 
-     return $connection;
+    return $connection;
+}
 
- }
-
- static function query(): QueryBuilder
- {
-     return ConnectionToDB::connectToDB()->createQueryBuilder();
- }
-
+function query(): QueryBuilder
+{
+    return database()->createQueryBuilder();
 }

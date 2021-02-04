@@ -10,6 +10,6 @@ class GetAllSkuService
 {
     public function executeService()
     {
-       return (new GetAllSkuRepository())->execute();
+        return (new GetAllSkuRepository())->execute();
     }
 }
