@@ -105,7 +105,7 @@ require_once 'app/TypeModelCollection.php';
 
     function validateSku(){
 
-        const skuFromDb = <?php echo json_encode($_GET); ?>;
+        const skuFromDb = <?php echo json_encode($skuArray); ?>;
         const skuFormValue = document.forms["form"]["sku"].value
 
         for(let i=0; i<skuFromDb.length; i++){

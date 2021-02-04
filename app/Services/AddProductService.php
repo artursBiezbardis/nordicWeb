@@ -7,8 +7,8 @@ use App\Repositories\AddProductRepository;
 
 class AddProductService
 {
-    public function executeService()
+    public function executeService($model)
     {
-        (new AddProductRepository())->add();
+        (new AddProductRepository())->add($model);
     }
 }

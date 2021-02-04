@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-use App\Models\{Book,DVD,Furniture};
+use App\Models\ProductTypeModels\{Book,DVD,Furniture};
 $typeModels=
     [
         'Book'=>new Book(),

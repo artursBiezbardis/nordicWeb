@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\ProductTypeModels;
 
-use App\Models\Parent\Product;
-use App\Models\Parent\DescriptionInterface;
+use App\Models\Product;
+use App\Models\ProductTypeInterface;
 
-class Furniture extends Product implements DescriptionInterface
+class Furniture extends Product implements ProductTypeInterface
 {
 
 
@@ -24,13 +24,13 @@ class Furniture extends Product implements DescriptionInterface
     public function formattingProductDescription($arrayOfDescriptionValues): string
     {
         return 'Dimensions: '
-            . $arrayOfDescriptionValues['furnitureHeight'] . ' CM X '
-            . $arrayOfDescriptionValues['furnitureWidth'] .' CM X '
-            . $arrayOfDescriptionValues['furnitureLength'] . ' CM.';
+            . $arrayOfDescriptionValues['furnitureHeight'] .'x'
+            . $arrayOfDescriptionValues['furnitureWidth'] .'x'
+            . $arrayOfDescriptionValues['furnitureLength'] ;
     }
 
     public function typeDescription(): string
     {
-        return 'Please provide.';
+        return 'Please provide Dimensions in HxLxW format.';
     }
 }

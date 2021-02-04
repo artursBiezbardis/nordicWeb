@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Models\Parent;
+namespace App\Models;
 
 class Product
 {
     protected $sku;
     protected $name;
     protected $price;
-    protected $productDescription;
+    protected $description;
 
 
     public function getSku():string
@@ -46,24 +46,17 @@ class Product
     }
 
 
-    public function getProductDescription():string
+    public function getDescription():string
     {
-        return $this->productDescription;
+        return $this->description;
     }
 
 
-    public function setProductDescription(string $productDescription): void
+    public function setDescription(string $description): void
     {
-        $this->productDescription = $productDescription;
+        $this->description = $description;
     }
 
-    /*public function __construct($name,$sku,$price,$productDescription)
-    {
-        $this->name = $name;
-        $this->sku = $sku;
-        $this->price = $price;
-        $this->productDescription = $productDescription;
-    }*/
 
 
 

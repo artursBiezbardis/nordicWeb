@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
 
-namespace App\Models;
+namespace App\Models\ProductTypeModels;
 
 
-use App\Models\Parent\Product;
-use App\Models\Parent\DescriptionInterface;
-class Book extends Product implements DescriptionInterface
+use App\Models\Product;
+use App\Models\ProductTypeInterface;
+class Book extends Product implements ProductTypeInterface
 {
 
     public function getProductType(): string
@@ -21,7 +21,7 @@ class Book extends Product implements DescriptionInterface
     }
     public function formattingProductDescription($arrayOfDescriptionValues): string
     {
-        return 'Weight: '.$arrayOfDescriptionValues['bookWeight'].' Kg';
+        return 'Weight: '.$arrayOfDescriptionValues['bookWeight'].'Kg';
     }
 
     function typeDescription(): string

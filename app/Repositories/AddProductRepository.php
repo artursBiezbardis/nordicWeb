@@ -7,7 +7,7 @@ namespace App\Repositories;
 class AddProductRepository
 {
 
-    public function add():void
+    public function add($model):void
     {
         query()
             ->insert('products')
@@ -19,10 +19,10 @@ class AddProductRepository
             ])
             ->setParameters([
 
-                'sku' => $_POST['sku'],
-                'name' => $_POST['name'],
-                'price' => $_POST['price'],
-                'description' => $_POST['description']
+                'sku' => $model->getSku(),
+                'name' => $model->getName(),
+                'price' => $model->getprice(),
+                'description' => $model->getdescription()
             ])
             ->execute();
     }

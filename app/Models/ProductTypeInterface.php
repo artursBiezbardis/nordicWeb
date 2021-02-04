@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Models\Parent;
+namespace App\Models;
 
 
-interface DescriptionInterface
+interface ProductTypeInterface
 {
  function descriptionFormValues():array;
  function formattingProductDescription($arrayOfDescriptionValues):string;

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\ProductTypeModels;
 
-use App\Models\Parent\Product;
-use App\Models\Parent\DescriptionInterface;
-class DVD extends Product implements DescriptionInterface
+use App\Models\Product;
+use App\Models\ProductTypeInterface;
+class DVD extends Product implements ProductTypeInterface
 {
 
     public function getProductType(): string
@@ -19,7 +19,7 @@ class DVD extends Product implements DescriptionInterface
     }
     public function formattingProductDescription($arrayOfDescriptionValues): string
     {
-        return 'Weight: '.$arrayOfDescriptionValues['dvdSize'].' Mb';
+        return 'Weight: '.$arrayOfDescriptionValues['dvdSize'].'Mb';
     }
 
     public function typeDescription(): string

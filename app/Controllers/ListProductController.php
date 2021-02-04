@@ -1,31 +1,32 @@
 <?php
 namespace App\Controllers;
 
-use App\Services\AddProductService;
-use App\Services\GetAllSkuService;
+use App\Models\ProductChildModel\ProductChild;
+use App\Services\ListProductService;
 class ListProductController
 {
-    public function index():string
+    public function listProducts()
     {
-
-
+        $products= (new ListProductService())->execute();
+        $productList=[];
+        foreach ($products as $product){
+            $productList[$product['sku']]= new ProductChild(
+                $product['sku'],
+                $product['name'],
+                (int)$product['price'],
+                $product['description'],);
+        }
 
         return require_once __DIR__ . '/../Views/ListProductView.php';
     }
 
-    public function addProduct(): void
+    public function massDelete(): void
     {
+        var_dump($_POST);die();
         require_once 'app/TypeModelCollection.php';
-        $_POST=array_filter($_POST);
-        $descriptionValuesArray=array_diff_key($_POST,array_flip(['sku','name','price','select']));
-        foreach ($typeModels as $key=>$model){
-            if($_POST['select']==$key){
-                $_POST['description']=$model->formattingProductDescription($descriptionValuesArray);
-            }
 
-        }
 
-        (new AddProductService())->executeService();
+        (new MassDeleteService())->executeService();
 
         header('Location: /product/list');
     }
