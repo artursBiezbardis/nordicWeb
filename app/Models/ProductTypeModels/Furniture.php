@@ -3,11 +3,10 @@
 
 namespace App\Models\ProductTypeModels;
 
-use App\Models\Product;
+
 use App\Models\ProductTypeInterface;
 
-class Furniture /*extends Product*/
-    implements ProductTypeInterface
+class Furniture implements ProductTypeInterface
 {
 
 

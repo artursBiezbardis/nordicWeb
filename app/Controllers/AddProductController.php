@@ -31,7 +31,7 @@ class AddProductController
         $model = new Product(
             $_POST['sku'],
             $_POST['name'],
-            intval($_POST['price']),
+            intval($_POST['price'] * 100),
             $_POST['description']);
 
         (new AddProductService())->executeService($model);

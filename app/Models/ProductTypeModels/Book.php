@@ -4,11 +4,9 @@
 namespace App\Models\ProductTypeModels;
 
 
-use App\Models\Product;
 use App\Models\ProductTypeInterface;
 
-class Book /*extends Product*/
-    implements ProductTypeInterface
+class Book implements ProductTypeInterface
 {
 
     public function getProductType(): string

@@ -21,7 +21,7 @@ class AddProductRepository
 
                 'sku' => $model->getSku(),
                 'name' => $model->getName(),
-                'price' => (int)($model->getprice() * 100),
+                'price' => ($model->getprice()),
                 'description' => $model->getdescription()
             ])
             ->execute();
