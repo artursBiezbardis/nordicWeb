@@ -1,3 +1,4 @@
+<?php use App\HelperMethods; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -43,7 +44,7 @@
                     <?php echo $product->getName(); ?>
                 </div>
                 <div class="flex justify-center col-start">
-                    <?php echo $product->getPrice() . " $"; ?>
+                    <?php echo HelperMethods::centsToDollars((float)$product->getPrice()) . " $"; ?>
                 </div>
                 <div class="flex justify-center col-start">
                     <?php echo $product->getDescription(); ?>

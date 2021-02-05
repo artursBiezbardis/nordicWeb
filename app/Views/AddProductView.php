@@ -49,7 +49,7 @@ require_once 'app/TypeModelCollection.php';
         </div>
         <div class="block flex justify-between pb-5">
             <label for="price">Price ($)</label>
-            <input class="border border-black " type="number" id="price" name="price" required/>
+            <input class="border border-black " type="number" id="price" name="price" step="0.01" required/>
         </div>
 
         <input type="hidden" id="description"/>
