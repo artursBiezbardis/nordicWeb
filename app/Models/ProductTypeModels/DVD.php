@@ -6,7 +6,8 @@ namespace App\Models\ProductTypeModels;
 use App\Models\Product;
 use App\Models\ProductTypeInterface;
 
-class DVD extends Product implements ProductTypeInterface
+class DVD /*extends Product*/
+    implements ProductTypeInterface
 {
 
     public function getProductType(): string

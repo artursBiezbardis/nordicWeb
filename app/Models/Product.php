@@ -4,13 +4,20 @@ namespace App\Models;
 
 class Product
 {
-    protected $sku;
-    protected $name;
-    protected $price;
-    protected $description;
+    private $sku;
+    private $name;
+    private $price;
+    private $description;
 
+    public function __construct(string $sku, string $name, int $price, string $description)
+    {
+        $this->sku = $sku;
+        $this->name = $name;
+        $this->price = $price;
+        $this->description = $description;
+    }
 
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
@@ -25,7 +32,6 @@ class Product
     {
         return $this->price;
     }
-
 
 
     public function getDescription(): string

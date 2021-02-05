@@ -4,11 +4,19 @@
 namespace App;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\DBAL\Connection;;
+use Doctrine\DBAL\Connection;
+
+;
+
 use Doctrine\DBAL\DriverManager;
 
 class ConnectToDB
 {
+
+    function query(): QueryBuilder
+    {
+        return self::database()->createQueryBuilder();
+    }
 
     function database(): Connection
     {
@@ -24,11 +32,6 @@ class ConnectToDB
         $connection->connect();
 
         return $connection;
-    }
-
-    function query(): QueryBuilder
-    {
-        return self::database()->createQueryBuilder();
     }
 
 }

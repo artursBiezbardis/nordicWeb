@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ProductChildModel\ProductChild;
+use App\Models\Product;
 use App\Services\ListProductDeleteService;
 use App\Services\ListProductService;
 
@@ -13,7 +13,7 @@ class ListProductController
         $products = (new ListProductService())->execute();
         $productList = [];
         foreach ($products as $product) {
-            $productList[$product['sku']] = new ProductChild(
+            $productList[$product['sku']] = new Product(
                 $product['sku'],
                 $product['name'],
                 (int)$product['price'],

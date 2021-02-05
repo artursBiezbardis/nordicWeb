@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Services\AddProductService;
 use App\Services\GetAllSkuService;
-use App\Models\ProductChildModel\ProductChild;
+use App\Models\Product;
 
 class AddProductController
 {
@@ -28,7 +28,7 @@ class AddProductController
             }
 
         }
-        $model = new ProductChild(
+        $model = new Product(
             $_POST['sku'],
             $_POST['name'],
             intval($_POST['price']),
