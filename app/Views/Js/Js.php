@@ -3,11 +3,14 @@
 namespace App\Views\Js;
 
 use App\HelperMethods;
+use App\Models\ProductTypeInterface;
+use App\TypeModelCollection;
 
 class Js
 {
-    static function addProductJs($typeCollection): string
+    public function addProductJs(): string
     {
+        $typeCollection=array_keys((new TypeModelCollection())->getTypeModels());
         $script =
             'function productTypeSwitchJS() {' . "\n" . "\n" .
 
@@ -34,9 +37,8 @@ class Js
         return $script;
     }
 
-    static function switchPosition($type, $typeCollection): string
+    public function switchPosition(string $type, array $typeCollection): string
     {
-
 
         $jsVar = "\n" . "\t" . "\t" . "\t" . "\t" . 'document.getElementById("' . $type . '").style.display=\'block\';';
         foreach ($typeCollection as $wrongType) {
@@ -48,8 +50,9 @@ class Js
         return $jsVar . "\n";
     }
 
-    static function validateEachProductAttributeInputField($typeCollection): string
+    public function validateEachProductAttributeInputField(): string
     {
+        $typeCollection=(new TypeModelCollection())->getTypeModels();
         $script =
             'function productTypeInputValidationJS() {' . "\n" . "\n" .
 
@@ -82,7 +85,7 @@ class Js
         return $script;
     }
 
-    static function switchPositionForInputFields($model): string
+    public function switchPositionForInputFields(ProductTypeInterface $model): string
     {
         $jsVar = '';
         foreach ($model->descriptionFormValues() as $input) {

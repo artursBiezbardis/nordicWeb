@@ -4,6 +4,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
     $r->addRoute('GET', '/product/add', $namespace . 'AddProductController@showAddProductForm');
     $r->addRoute('POST', '/product/add', $namespace . 'AddProductController@addProduct');
+    //$r->addRoute('', '/product/add', $namespace . 'AddProductController@update');
 
     $r->addRoute('GET', '/product/list', $namespace . 'ListProductController@listProducts');
     $r->addRoute('POST', '/product/list', $namespace . 'ListProductController@massDelete');

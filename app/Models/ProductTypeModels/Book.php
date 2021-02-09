@@ -20,14 +20,14 @@ class Book implements ProductTypeInterface
         return ['Weight (KG)'];
     }
 
-    public function formattingProductDescription($arrayOfDescriptionValues): string
+    public function formattingProductDescription(array $arrayOfDescriptionValues): string
     {
         return 'Weight: ' . $arrayOfDescriptionValues['bookWeight'] . 'Kg';
     }
 
-    function typeDescription(): string
+    public function typeDescription(): string
     {
-        return 'Please enter weight in kilograms.';
+        return 'Please provide weight in kilograms.';
     }
 
 }

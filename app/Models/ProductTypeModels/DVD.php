@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Models\ProductTypeModels;
@@ -20,9 +20,9 @@ class DVD implements ProductTypeInterface
         return ['Size (Mb)'];
     }
 
-    public function formattingProductDescription($arrayOfDescriptionValues): string
+    public function formattingProductDescription(array $arrayOfDescriptionValues): string
     {
-        return 'Weight: ' . $arrayOfDescriptionValues['dvdSize'] . 'Mb';
+        return 'Size: ' . $arrayOfDescriptionValues['dvdSize'] . 'Mb';
     }
 
     public function typeDescription(): string

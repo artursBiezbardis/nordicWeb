@@ -31,7 +31,7 @@
 </header>
 <form action="/product/list" method="post" id="formList" onsubmit="">
 
-    <div class="px-16  flex justify-center flex-wrap content-around ">
+    <div class="px-16 flex justify-center flex-wrap content-around ">
         <?php foreach ($productList as $product): ?>
 
             <div class="text-sm box-border border border-black w-52 h-40 rounded-sm  mx-3  my-5">
@@ -44,7 +44,7 @@
                     <?php echo $product->getName(); ?>
                 </div>
                 <div class="flex justify-center col-start">
-                    <?php echo HelperMethods::centsToDollars((float)$product->getPrice()) . " $"; ?>
+                    <?php echo (new HelperMethods)->centsToDollars((float)$product->getPrice()) . " $"; ?>
                 </div>
                 <div class="flex justify-center col-start">
                     <?php echo $product->getDescription(); ?>

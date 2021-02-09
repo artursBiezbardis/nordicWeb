@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Models\ProductTypeModels;
@@ -21,7 +21,7 @@ class Furniture implements ProductTypeInterface
         return ['Height (CM)', 'Width (CM)', 'Length (CM)'];
     }
 
-    public function formattingProductDescription($arrayOfDescriptionValues): string
+    public function formattingProductDescription(array $arrayOfDescriptionValues): string
     {
         return 'Dimensions: '
             . $arrayOfDescriptionValues['furnitureHeight'] . 'x'
@@ -31,6 +31,6 @@ class Furniture implements ProductTypeInterface
 
     public function typeDescription(): string
     {
-        return 'Please provide Dimensions in HxLxW format.';
+        return 'Please provide Dimensions in HxWxL format.';
     }
 }

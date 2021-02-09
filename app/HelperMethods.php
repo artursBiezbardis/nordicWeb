@@ -4,10 +4,11 @@
 namespace App;
 
 
+use App\Models\ProductTypeInterface;
+
 class HelperMethods
 {
-
-    static function typeCollection($dir): array
+    static function typeCollection(string $dir): array
     {
         $productTypes = [];
         $files = scandir($dir);
@@ -22,13 +23,13 @@ class HelperMethods
         return $productTypes;
     }
 
-    static function formatTypeForHtmlInput($model, $input): string
+    public function formatTypeForHtmlInput(ProductTypeInterface $model, string $input): string
     {
-        return strtolower(($model->getProductType())) . (HelperMethods::getPropertyNameForHtmlInput($input));
+        return strtolower(($model->getProductType())) . (self::getPropertyNameForHtmlInput($input));
 
     }
 
-    static function getPropertyNameForHtmlInput($input): string
+    public function getPropertyNameForHtmlInput(string $input): string
     {
 
         $name = explode(' ', $input);
@@ -36,7 +37,7 @@ class HelperMethods
         return $name[0];
     }
 
-    static function centsToDollars($value)
+    public function centsToDollars(int $value)
     {
         return number_format(($value / 100), 2, '.', ' ');
     }

@@ -1,34 +1,23 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
 use App\Models\Product;
-use App\Services\ListProductDeleteService;
+use App\Services\DeleteListProductsService;
 use App\Services\ListProductService;
 
 class ListProductController
 {
-    public function listProducts()
+    public function listProducts(): int
     {
-        $products = (new ListProductService())->execute();
-        $productList = [];
-        foreach ($products as $product) {
-            $productList[$product['sku']] = new Product(
-                $product['sku'],
-                $product['name'],
-                (int)$product['price'],
-                $product['description'],);
-        }
+        $productList=(new ListProductService())->crateList();
 
         return require_once __DIR__ . '/../Views/ListProductView.php';
     }
 
     public function massDelete(): void
     {
-        foreach ($_POST as $sku) {
-
-            (new ListProductDeleteService())->execute($sku);
-        }
         header('Location: /product/list');
+        (new DeleteListProductsService())->deleteSelectedProducts();
     }
 }

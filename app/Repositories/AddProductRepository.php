@@ -1,13 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Repositories;
 
 
+use App\Models\Product;
+
 class AddProductRepository
 {
 
-    public function add($model): void
+    public function save(Product $model): void
     {
         query()
             ->insert('products')
@@ -21,7 +23,7 @@ class AddProductRepository
 
                 'sku' => $model->getSku(),
                 'name' => $model->getName(),
-                'price' => ($model->getprice()),
+                'price' => $model->getprice(),
                 'description' => $model->getdescription()
             ])
             ->execute();

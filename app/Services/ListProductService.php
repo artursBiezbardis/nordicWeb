@@ -1,15 +1,25 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\Product;
 use App\Repositories\ListProductRepository;
 
 class ListProductService
 {
-    function execute()
+    function crateList(): array
     {
+        session_unset();
 
-        return (new ListProductRepository())->execute();
+        $products = (new ListProductRepository())->create();
+        $productList = [];
+        foreach ($products as $product) {
+            $productList[$product['sku']] = new Product(
+                $product['sku'],
+                $product['name'],
+                (int)$product['price'],
+                $product['description']);
+        }
+        return $productList;
     }
 }

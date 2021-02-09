@@ -10,17 +10,8 @@ create table products
         unique (sku)
 );
 
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (9, '3268493', '32423', 1000, 'Weight: 1 Kg');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (13, 'gjfjh', 'jkhgkjg', 45564, 'Weight: 45 Kg');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (14, 'wer', 'Denis', 123, 'Weight: 32412 Kg');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (16, 'trew 36294023', 'ramis', 123, 'Weight: 1234Kg');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (17, 'terhoi 3242354', 'bumba', 12, 'Weight: 261218Mb');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (19, 'wqety 346891', 'shelf', 123, 'Dimensions: 21x12x31');
-INSERT INTO products.products (id, sku, name, price, description)
-VALUES (20, 'sdcd', 'arturs', 324, 'Weight: 233Kg');
+INSERT INTO products.products (id, sku, name, price, description) VALUES (47, 'mrk-56788', 'The Name of the Rose', 2999, 'Weight: 2Kg');
+INSERT INTO products.products (id, sku, name, price, description) VALUES (48, 'mrk-567', 'Bed', 49999, 'Dimensions: 60x240x240');
+INSERT INTO products.products (id, sku, name, price, description) VALUES (51, 'mrd-56785', 'Toy Story', 299, 'Size: 3880Mb');
+INSERT INTO products.products (id, sku, name, price, description) VALUES (54, 'mrk-56785', 'Star Wars', 128, 'Size: 34568Mb');
+INSERT INTO products.products (id, sku, name, price, description) VALUES (55, 'mrk-5678', 'Shelf', 2399, 'Dimensions: 120x40x180');

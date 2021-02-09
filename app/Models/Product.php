@@ -27,17 +27,14 @@ class Product
         return $this->name;
     }
 
-
     public function getPrice(): int
     {
         return $this->price;
     }
 
-
     public function getDescription(): string
     {
         return $this->description;
     }
-
 
 }

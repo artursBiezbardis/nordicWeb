@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Models;
@@ -6,9 +6,9 @@ namespace App\Models;
 
 interface ProductTypeInterface
 {
-    function descriptionFormValues(): array;
+    public function descriptionFormValues(): array;
 
-    function formattingProductDescription($arrayOfDescriptionValues): string;
+    public function formattingProductDescription(array $arrayOfDescriptionValues): string;
 
-    function typeDescription(): string;
+    public function typeDescription(): string;
 }

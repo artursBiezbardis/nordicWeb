@@ -1,19 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Repositories;
 
 
-class ListProductDeleteRepository
+class DeleteListProductsRepository
 {
 
-    public function execute(string $sku): void
+    public function delete(string $sku): void
     {
         query()
             ->delete('products')
             ->where('sku= :sku')
             ->setParameter('sku', $sku)
             ->execute();
-
     }
 }

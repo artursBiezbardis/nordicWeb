@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace App\Repositories;
@@ -6,8 +6,7 @@ namespace App\Repositories;
 
 class ListProductRepository
 {
-
-    public function execute()
+    public function create()
     {
         return query()
             ->select('*')

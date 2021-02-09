@@ -1,41 +1,20 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controllers;
 
 use App\Services\AddProductService;
-use App\Services\GetAllSkuService;
-use App\Models\Product;
 
 class AddProductController
 {
-    public function showAddProductForm(): string
+    public function showAddProductForm(): int
     {
-
-        $skuArray = (new GetAllSkuService())->executeService();
-
-
         return require_once __DIR__ . '/../Views/AddProductView.php';
     }
-
     public function addProduct(): void
     {
-        require_once 'app/TypeModelCollection.php';
-        $_POST = array_filter($_POST);
-        $descriptionValueArray = array_diff_key($_POST, array_flip(['sku', 'name', 'price', 'select']));
-        foreach ($typeModels as $key => $model) {
-            if ($_POST['select'] == $key) {
-                $_POST['description'] = $model->formattingProductDescription($descriptionValueArray);
-            }
+        header('Location:/product/list');
+        (new AddProductService())->saveProduct();
 
-        }
-        $model = new Product(
-            $_POST['sku'],
-            $_POST['name'],
-            intval($_POST['price'] * 100),
-            $_POST['description']);
-
-        (new AddProductService())->executeService($model);
-
-        header('Location: /product/list');
     }
+
 }
