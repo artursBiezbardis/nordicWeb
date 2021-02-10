@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
-
 namespace App\Services;
 
-use App\Controllers\AddProductController;
 use App\Models\Product;
 use App\Repositories\AddProductRepository;
 use App\Repositories\CheckIfSkuExistInDBRepository;
@@ -17,7 +15,8 @@ class AddProductService
 
         if (!$skuExist) {
             $_POST = array_filter($_POST);
-            $descriptionValueArray = array_diff_key($_POST, array_flip(['sku', 'name', 'price', 'select']));
+            $descriptionValueArray = array_diff_key($_POST,
+                array_flip(['sku', 'name', 'price', 'select']));
             foreach ((new TypeModelCollection())->getTypeModels() as $key => $model) {
                 if ($_POST['select'] == $key) {
                     $_POST['description'] = $model->formattingProductDescription($descriptionValueArray);
@@ -31,8 +30,11 @@ class AddProductService
 
         } else {
             header('Location:/product/add');
-            $_SESSION['select'] = $_POST['select'];
+            foreach ($_POST as $key => $item) {
+                if ($item != '') {
+                    $_SESSION[$key] = $item;
+                }
+            }
         }
-
     }
 }

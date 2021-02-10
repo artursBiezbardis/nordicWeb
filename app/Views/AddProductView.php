@@ -4,6 +4,7 @@ use App\HelperMethods;
 use App\Views\Js\Js;
 use App\TypeModelCollection;
 
+var_dump($_SESSION);
 $typeModels = (new TypeModelCollection())->getTypeModels();
 $helpers = new HelperMethods();
 $generatingJs = new Js();
@@ -45,8 +46,8 @@ $generatingJs = new Js();
             <div class="flex justify-between pb-5">
                 <label class="mr-20" for="sku">SKU</label>
                 <div>
-                    <input class="border border <?php echo (key_exists('select', $_SESSION)) ? 'border border-red-600' : 'border-black' ?>"
-                           type="text" id="sku" name="sku" required/>
+                    <input <?php echo (key_exists('sku', $_SESSION)) ? 'class="border-2 border-red-600" value="' . $_SESSION['sku'] . '"' : 'class="border border-black' ?>
+                            type="text" id="sku" name="sku" required/>
                     <?php echo (key_exists('select', $_SESSION)) ? '<span class="flow-root font-light text-sm text-red-600">SKU number exists in database</span>' : '' ?>
                 </div>
 
@@ -54,11 +55,15 @@ $generatingJs = new Js();
 
             <div class="block flex justify-between pb-5">
                 <label for="name">Name</label>
-                <input class="border border-black" type="text" id="name" name="name" required/>
+                <input class="border border-black" type="text" id="name"
+                       name="name" <?php echo (key_exists('name', $_SESSION)) ? 'value="' . $_SESSION['name'] . '"' : '' ?>
+                       required/>
             </div>
             <div class="block flex justify-between pb-5">
                 <label for="price">Price ($)</label>
-                <input class="border border-black" type="number" id="price" name="price" step="0.01" required/>
+                <input class="border border-black" type="number" id="price" name="price"
+                       step="0.01" <?php echo (key_exists('price', $_SESSION)) ? 'value="' . $_SESSION['price'] . '"' : '' ?>
+                       required/>
             </div>
 
             <input type="hidden" id="description"/>
@@ -93,7 +98,10 @@ $generatingJs = new Js();
                             <?php echo $input ?></label>
                         <input class=" border border-black" type="number"
                                id="<?php echo $helpers->formatTypeForHtmlInput($model, $input); ?>"
-                               name="<?php echo $helpers->formatTypeForHtmlInput($model, $input); ?>">
+                               name="<?php echo $helpers->formatTypeForHtmlInput($model, $input); ?>"
+                               value="<?php echo (key_exists($helpers->formatTypeForHtmlInput
+                               ($model, $input), $_SESSION)) ? $_SESSION[$helpers->
+                               formatTypeForHtmlInput($model, $input)] : '' ?>">
                     </div>
                     <span>
                 <?php endforeach; ?>
