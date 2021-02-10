@@ -11,7 +11,7 @@ class AddProductService
 {
     public function saveProduct()
     {
-        $skuExist = (new CheckIfSkuExistInDBRepository())->execute();
+        $skuExist = (new CheckIfSkuExistInDBRepository())->execute($_POST['sku']);
 
         if (!$skuExist) {
             $_POST = array_filter($_POST);

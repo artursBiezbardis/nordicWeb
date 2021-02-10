@@ -6,13 +6,13 @@ namespace App\Repositories;
 
 class CheckIfSkuExistInDBRepository
 {
-    public function execute()
+    public function execute($sku)
     {
         return query()
             ->select('id')
             ->from('products')
             ->where('sku = :sku')
-            ->setParameter('sku', $_POST['sku'])
+            ->setParameter('sku', $sku)
             ->execute()
             ->fetchOne();
     }
