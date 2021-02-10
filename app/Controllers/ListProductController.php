@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Product;
 use App\Services\DeleteListProductsService;
 use App\Services\ListProductService;
 
@@ -10,7 +9,7 @@ class ListProductController
 {
     public function listProducts(): int
     {
-        $productList=(new ListProductService())->crateList();
+        $productList = (new ListProductService())->crateList();
 
         return require_once __DIR__ . '/../Views/ListProductView.php';
     }

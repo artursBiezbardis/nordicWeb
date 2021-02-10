@@ -5,13 +5,14 @@ namespace App\Services;
 
 use App\Repositories\CheckIfSkuExistInDBRepository;
 use App\Repositories\DeleteListProductsRepository;
+
 class DeleteListProductsService
 {
     public function deleteSelectedProducts()
     {
-        $checkIfExistById=new CheckIfSkuExistInDBRepository();
+        $checkIfExistById = new CheckIfSkuExistInDBRepository();
         foreach ($_POST as $sku) {
-            if(!is_null($checkIfExistById->execute($sku))){
+            if (!is_null($checkIfExistById->execute($sku))) {
                 (new DeleteListProductsRepository())->delete($sku);
             }
         }

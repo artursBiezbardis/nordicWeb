@@ -1,14 +1,13 @@
 <?php
 
 use App\HelperMethods;
-use App\Views\Js\Js;
 use App\TypeModelCollection;
+use App\Views\Js\Js;
 
 $typeModels = (new TypeModelCollection())->getTypeModels();
 $helpers = new HelperMethods();
 $generatingJs = new Js();
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,17 +40,14 @@ $generatingJs = new Js();
 <div class="flex-grow">
     <form action="/product/add" method="post" id="form" onsubmit="productTypeInputValidationJS();">
         <div class="mx-16 pt-16 w-96">
-
             <div class="flex justify-between pb-5">
                 <label class="mr-20" for="sku">SKU</label>
                 <div>
-                    <input <?php echo (key_exists('sku', $_SESSION)) ? 'class="border-2 border-red-600" value="' . $_SESSION['sku'] . '"' : 'class="border border-black' ?>
+                    <input <?php echo (key_exists('sku', $_SESSION) && is_numeric($_SESSION['skuExist'])) ? 'class="border-2 border-red-600" value="' . $_SESSION['sku'] . '"' : 'class="border border-black"value="' . $_SESSION['sku'] . '"' ?>
                             type="text" id="sku" name="sku" required/>
-                    <?php echo (key_exists('select', $_SESSION)) ? '<span class="flow-root font-light text-sm text-red-600">SKU number exists in database</span>' : '' ?>
+                    <?php echo (key_exists('sku', $_SESSION) && is_numeric($_SESSION['skuExist'])) ? '<span class="flow-root font-light text-sm text-red-600">SKU number exists in database</span>' : '' ?>
                 </div>
-
             </div>
-
             <div class="block flex justify-between pb-5">
                 <label for="name">Name</label>
                 <input class="border border-black" type="text" id="name"
@@ -60,11 +56,13 @@ $generatingJs = new Js();
             </div>
             <div class="block flex justify-between pb-5">
                 <label for="price">Price ($)</label>
-                <input class="border border-black" type="number" id="price" name="price"
-                       step="0.01" <?php echo (key_exists('price', $_SESSION)) ? 'value="' . $_SESSION['price'] . '"' : '' ?>
-                       required/>
+                <div>
+                    <input <?php echo (key_exists('price', $_SESSION) && !is_numeric($_SESSION['price']) || ($_SESSION['price']) < 0) ? 'class="border-2 border-red-600" value="' . $_SESSION['price'] . '"' : 'class="border border-black" value="' . $_SESSION['price'] . '"' ?>
+                            type="number" id="price" name="price"
+                            step="0.01" required/>
+                    <?php echo (key_exists('price', $_SESSION) && !is_numeric($_SESSION['price']) || ($_SESSION['price']) < 0) ? '<span class="flow-root font-light text-sm text-red-600">Price must be positive number</span>' : '' ?>
+                </div>
             </div>
-
             <input type="hidden" id="description"/>
 
             <div class="flex justify-between pb-5">
@@ -78,20 +76,14 @@ $generatingJs = new Js();
                     <?php endforeach; ?>
                 </select>
             </div>
-
-
         </div>
-
-
         <div style="width: 450px" class="mx-16 pt-16">
             <?php foreach ($typeModels as $model): ?>
                 <div id="<?php echo $model->getProductType() ?>"
                      class="p-5 border border-black box-border rounded-sm hidden">
-
                     <?php foreach ($model->descriptionFormValues() as $input):
                     $inputModelName = strtolower(($model->getProductType())) .
-                        ($helpers->getPropertyNameForHtmlInput($input));
-                    ?>
+                        ($helpers->getPropertyNameForHtmlInput($input));?>
                     <div class="block flex justify-between pb-5">
                         <label for="<?php echo $helpers->formatTypeForHtmlInput($model, $input) ?>">
                             <?php echo $input ?></label>
@@ -104,14 +96,10 @@ $generatingJs = new Js();
                     </div>
                     <span>
                 <?php endforeach; ?>
-
                 <a class="font-light"><?php echo $model->typeDescription() ?></a>
-
                 </div>
             <?php endforeach; ?>
-
         </div>
-
     </form>
 </div>
 

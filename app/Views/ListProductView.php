@@ -33,7 +33,6 @@
 
     <div class="px-16 flex justify-center flex-wrap content-around ">
         <?php foreach ($productList as $product): ?>
-
             <div class="text-sm box-border border border-black w-52 h-40 rounded-sm  mx-3  my-5">
                 <input class="mt-2 ml-2" type="checkbox" id="<?php echo $product->getSku(); ?>"
                        name="<?php echo $product->getSku(); ?>" value="<?php echo $product->getSku(); ?>">
@@ -52,10 +51,7 @@
 
             </div>
         <?php endforeach; ?>
-
-
     </div>
-
 </form>
 
 <div class="flex-grow "></div>

@@ -10,6 +10,7 @@ class AddProductController
     {
         return require_once __DIR__ . '/../Views/AddProductView.php';
     }
+
     public function addProduct(): void
     {
         header('Location:/product/list');

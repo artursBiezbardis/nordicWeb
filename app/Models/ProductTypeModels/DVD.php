@@ -3,7 +3,6 @@
 
 namespace App\Models\ProductTypeModels;
 
-use App\Models\Product;
 use App\Models\ProductTypeInterface;
 
 class DVD implements ProductTypeInterface

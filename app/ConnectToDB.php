@@ -3,12 +3,11 @@
 
 namespace App;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 ;
-
-use Doctrine\DBAL\DriverManager;
 
 class ConnectToDB
 {

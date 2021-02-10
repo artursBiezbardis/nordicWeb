@@ -1,7 +1,7 @@
 <?php
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use App\ConnectToDB;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 require_once 'vendor/autoload.php';
 

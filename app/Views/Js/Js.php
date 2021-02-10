@@ -10,7 +10,7 @@ class Js
 {
     public function addProductJs(): string
     {
-        $typeCollection=array_keys((new TypeModelCollection())->getTypeModels());
+        $typeCollection = array_keys((new TypeModelCollection())->getTypeModels());
         $script =
             'function productTypeSwitchJS() {' . "\n" . "\n" .
 
@@ -52,7 +52,7 @@ class Js
 
     public function validateEachProductAttributeInputField(): string
     {
-        $typeCollection=(new TypeModelCollection())->getTypeModels();
+        $typeCollection = (new TypeModelCollection())->getTypeModels();
         $script =
             'function productTypeInputValidationJS() {' . "\n" . "\n" .
 
