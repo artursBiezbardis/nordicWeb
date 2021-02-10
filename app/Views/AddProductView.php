@@ -4,7 +4,6 @@ use App\HelperMethods;
 use App\Views\Js\Js;
 use App\TypeModelCollection;
 
-var_dump($_SESSION);
 $typeModels = (new TypeModelCollection())->getTypeModels();
 $helpers = new HelperMethods();
 $generatingJs = new Js();
