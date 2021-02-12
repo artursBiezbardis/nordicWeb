@@ -17,7 +17,7 @@ class Book implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['Weight (KG)'];
+        return ['bookWeight'=>'Weight (KG)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string
@@ -29,6 +29,7 @@ class Book implements ProductTypeInterface
     {
         return 'Please provide weight in kilograms.';
     }
+
 
 }
 

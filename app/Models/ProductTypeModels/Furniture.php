@@ -18,7 +18,7 @@ class Furniture implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['Height (CM)', 'Width (CM)', 'Length (CM)'];
+        return ['furnitureHeight'=>'Height (CM)', 'furnitureWidth'=>'Width (CM)', 'furnitureLength'=>'Length (CM)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string
@@ -33,4 +33,6 @@ class Furniture implements ProductTypeInterface
     {
         return 'Please provide Dimensions in HxWxL format.';
     }
+
+
 }

@@ -16,7 +16,7 @@ class DVD implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['Size (Mb)'];
+        return ['dvdSize'=>'Size (Mb)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string
@@ -28,5 +28,6 @@ class DVD implements ProductTypeInterface
     {
         return 'Please provide DVD size in megabytes.';
     }
+
 
 }

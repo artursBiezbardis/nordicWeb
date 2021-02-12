@@ -54,10 +54,20 @@ class Validation
         return ['errorMessage' => $errorMessage, 'validStatus' => $validStatus, 'value' => $value];
     }
 
-    public function typeValidation(ProductTypeInterface $model, string $selection, array $values): array
+    public function attributeFieldValidation(string $value): array
     {
         $errorMessage = '';
         $validStatus = true;
+        $float=(float)$value;
+        if ($value === '') {
+            $errorMessage = 'Enter value in field!';
+            $validStatus = false;
+        }elseif (!is_numeric($value)|| $float <0) {
+            $errorMessage = 'This value must be positive number!';
+            $validStatus = false;
+        }
+
+        return ['errorMessage' => $errorMessage, 'validStatus' => $validStatus, 'value' => $value];
 
 
     }

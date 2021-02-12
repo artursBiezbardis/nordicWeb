@@ -11,4 +11,5 @@ interface ProductTypeInterface
     public function formattingProductDescription(array $arrayOfDescriptionValues): string;
 
     public function typeDescription(): string;
+
 }

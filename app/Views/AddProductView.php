@@ -4,13 +4,11 @@ use App\HelperMethods;
 use App\Models\Product;
 use App\TypeModelCollection;
 use App\Views\Js\Js;
-use App\Views\classNoneTypeFields\classNoneTypeFields;
 
 $typeModels = (new TypeModelCollection())->getTypeModels();
 $helpers = new HelperMethods();
 $generatingJs = new Js();
 
-var_dump($_SESSION);
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,14 +45,17 @@ var_dump($_SESSION);
             <?php
             $noneTypeNames = Product::$noneTypeFieldsDescription;
             foreach ($noneTypeNames as $name => $item):
-                !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? $padding='pb-0': $padding='pb-5'
+                !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? $padding = 'pb-0' : $padding = 'pb-5'
                 ?>
                 <div class="flex justify-between <?php echo $padding ?>">
                     <?php echo '<label class="mr-20f float-left" for="' . $item . '">' . $name . '</label>'; ?>
                     <div>
                         <?php $value = $_SESSION[$item]['value'] ?? ''; ?>
-                        <?php echo empty($_SESSION) || $_SESSION[$item]['validStatus'] ? '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
-                        <?php echo !empty($_SESSION) || !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
+                        <?php echo empty($_SESSION) || $_SESSION[$item]['validStatus']
+                            ? '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />'
+                            : '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
+                        <?php echo !empty($_SESSION) || !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus']
+                            ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
                     </div>
                 </div>
             <?php endforeach ?>
@@ -71,21 +72,22 @@ var_dump($_SESSION);
             </div>
         </div>
         <div style="width: 450px" class="mx-16 pt-16">
-            <?php foreach ($typeModels as $model): ?>
-                <div id="<?php echo $model->getProductType() ?>"
+            <?php foreach ($typeModels as $model):
+                $modelName=$model->getProductType()?>
+                <div id="<?php echo $modelName ?>"
                      class="p-5 border border-black box-border rounded-sm hidden">
-                    <?php foreach ($model->descriptionFormValues() as $input):
-                    $inputModelName = strtolower(($model->getProductType())) .
-                        ($helpers->getPropertyNameForHtmlInput($input)); ?>
-                    <div class="block flex justify-between pb-5">
-                        <label for="<?php echo $helpers->formatTypeForHtmlInput($model, $input) ?>">
-                            <?php echo $input ?></label>
-                        <input class=" border border-black" type="number"
-                               id="<?php echo $helpers->formatTypeForHtmlInput($model, $input); ?>"
-                               name="<?php echo $helpers->formatTypeForHtmlInput($model, $input); ?>"
-                               value="<?php echo (key_exists($helpers->formatTypeForHtmlInput
-                               ($model, $input), $_SESSION)) ? $_SESSION[$helpers->
-                               formatTypeForHtmlInput($model, $input)] : '' ?>">
+                    <?php foreach ($model->descriptionFormValues() as $item => $input):
+                    !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? $padding = 'pb-0' : $padding = 'pb-5' ?>
+                    <div class="flex justify-between <?php echo $padding ?>">
+                        <label for="<?php echo $item ?>"><?php echo $input ?></label>
+                        <div>
+                            <?php $value = $_SESSION[$item]['value'] ?? ''; ?>
+                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus'])&& !$_SESSION[$item]['validStatus']
+                            ? '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />'
+                            : '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
+                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus'])&& !$_SESSION[$item]['validStatus']
+                                ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
+                        </div>
                     </div>
                     <span>
                 <?php endforeach; ?>
@@ -96,7 +98,7 @@ var_dump($_SESSION);
     </form>
 </div>
 
-<footer class="flex justify-center border-1 border-black border-t mx-16 ">
+<footer class="flex justify-center border-1 border-black border-t mx-16">
     <a class="py-10">Scandiweb test assignment</a>
 </footer>
 <script>
