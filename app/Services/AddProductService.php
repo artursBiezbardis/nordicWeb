@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\HelperMethods;
 use App\Models\Product;
+use App\Models\Validation;
 use App\Repositories\AddProductRepository;
 use App\Repositories\CheckIfSkuExistInDBRepository;
 use App\TypeModelCollection;
@@ -11,17 +13,17 @@ class AddProductService
 {
     public function saveProduct(): void
     {
-        $skuExist = (new CheckIfSkuExistInDBRepository())->execute($_POST['sku']);
+        header('Location:/product/add');
+        $_POST = array_filter($_POST);
+        $validation= new Validation();
+        $_SESSION['skuExistInDB']=(new CheckIfSkuExistInDBRepository())->execute($_POST['sku']);
+        $_SESSION['sku'] = $validation->skuValidation(strval($_POST['sku']),$_SESSION['skuExistInDB']);
+        $_SESSION['name'] = $validation->nameValidation(strval($_POST['name']));
+        $_SESSION['price'] = $validation->priceValidation(strval($_POST['price']));
+        $_SESSION['select'] = $_POST['select'];
 
-        if (!is_numeric($_POST['price']) || ($_POST['price']) < 0 || is_numeric($skuExist)) {
-            header('Location:/product/add');
-            foreach ($_POST as $key => $item) {
-                if ($item != '') {
-                    $_SESSION[$key] = $item;
-                }
-            }
-            $_SESSION['skuExist'] = $skuExist;
-        } else {
+        if ($_SESSION['sku']['validStatus']&&$_SESSION['name']['validStatus']&&$_SESSION['price']['validStatus']) {
+            header('Location:/product/list');
             $_POST = array_filter($_POST);
             $descriptionValueArray = array_diff_key($_POST,
                 array_flip(['sku', 'name', 'price', 'select']));

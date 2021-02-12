@@ -3,10 +3,13 @@
 use App\HelperMethods;
 use App\TypeModelCollection;
 use App\Views\Js\Js;
+use App\Views\classNoneTypeFields\classNoneTypeFields;
 
 $typeModels = (new TypeModelCollection())->getTypeModels();
 $helpers = new HelperMethods();
 $generatingJs = new Js();
+
+var_dump($_SESSION);
 ?>
 <!doctype html>
 <html lang="en">
@@ -43,26 +46,28 @@ $generatingJs = new Js();
             <div class="flex justify-between pb-5">
                 <label class="mr-20" for="sku">SKU</label>
                 <div>
-                    <input <?php echo (key_exists('sku', $_SESSION) && is_numeric($_SESSION['skuExist'])) ? 'class="border-2 border-red-600" value="' . $_SESSION['sku'] . '"' : 'class="border border-black"value="' . $_SESSION['sku'] . '"' ?>
-                            type="text" id="sku" name="sku" required/>
-                    <?php echo (key_exists('sku', $_SESSION) && is_numeric($_SESSION['skuExist'])) ? '<span class="flow-root font-light text-sm text-red-600">SKU number exists in database</span>' : '' ?>
+                    <?php $value = $_SESSION['sku']['value'] ?? '';
+                    echo empty($_SESSION) || $_SESSION['sku']['validStatus'] ? '<input  class="border border-black" value="' . $value . '" type="text" id="sku" name="sku" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="sku" name="sku" />'?>
+                    <?php echo !empty($_SESSION) || !$_SESSION['sku']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['sku']['errorMessage'] . '</span>' : '' ?>
                 </div>
             </div>
-            <div class="block flex justify-between pb-5">
+            <div class="flex justify-between pb-5">
                 <label for="name">Name</label>
-                <input class="border border-black" type="text" id="name"
-                       name="name" <?php echo (key_exists('name', $_SESSION)) ? 'value="' . $_SESSION['name'] . '"' : '' ?>
-                       required/>
+                <div>
+                    <?php $value = $_SESSION['name']['value'] ?? '';
+                    echo empty($_SESSION) || $_SESSION['name']['validStatus'] ? '<input class="border border-black" value="' . $value . '" type="text" id="name" name="name" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="name" name="name" />'?>
+                    <?php echo !empty($_SESSION) || !$_SESSION['name']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['name']['errorMessage'] . '</span>' : '' ?>
+                </div>
             </div>
-            <div class="block flex justify-between pb-5">
+            <div class="flex justify-between pb-5">
                 <label for="price">Price ($)</label>
                 <div>
-                    <input <?php echo (key_exists('price', $_SESSION) && !is_numeric($_SESSION['price']) || ($_SESSION['price']) < 0) ? 'class="border-2 border-red-600" value="' . $_SESSION['price'] . '"' : 'class="border border-black" value="' . $_SESSION['price'] . '"' ?>
-                            type="number" id="price" name="price"
-                            step="0.01" required/>
-                    <?php echo (key_exists('price', $_SESSION) && !is_numeric($_SESSION['price']) || ($_SESSION['price']) < 0) ? '<span class="flow-root font-light text-sm text-red-600">Price must be positive number</span>' : '' ?>
+                    <?php $value = $_SESSION['price']['value'] ?? '';
+                    echo empty($_SESSION) || $_SESSION['price']['validStatus'] ? '<input class="border border-black" value="' . $value . '" type="text" id="price" name="price" />' : '<input class="border-2 border-red-600" value="' . $value . '" type="text" id="price" name="price" />'?>
+                    <?php echo !empty($_SESSION) || !$_SESSION['price']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['price']['errorMessage'] . '</span>' : '' ?>
                 </div>
             </div>
+
             <input type="hidden" id="description"/>
 
             <div class="flex justify-between pb-5">
@@ -83,7 +88,7 @@ $generatingJs = new Js();
                      class="p-5 border border-black box-border rounded-sm hidden">
                     <?php foreach ($model->descriptionFormValues() as $input):
                     $inputModelName = strtolower(($model->getProductType())) .
-                        ($helpers->getPropertyNameForHtmlInput($input));?>
+                        ($helpers->getPropertyNameForHtmlInput($input)); ?>
                     <div class="block flex justify-between pb-5">
                         <label for="<?php echo $helpers->formatTypeForHtmlInput($model, $input) ?>">
                             <?php echo $input ?></label>

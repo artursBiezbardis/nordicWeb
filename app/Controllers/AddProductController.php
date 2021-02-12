@@ -13,7 +13,6 @@ class AddProductController
 
     public function addProduct(): void
     {
-        header('Location:/product/list');
         (new AddProductService())->saveProduct();
 
     }

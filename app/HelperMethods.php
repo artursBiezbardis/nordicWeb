@@ -41,5 +41,25 @@ class HelperMethods
     {
         return number_format(($value / 100), 2, '.', ' ');
     }
+
+    public function validatePrice($price):bool
+    {
+        $pattern='/^\d+(\.\d{1,2})?$/';
+        if (preg_match($pattern, $price) == '0') {
+           return false;
+        }else{
+            return true;
+        }
+    }
+    public function validatePriceField($validatePrice,$fieldContent):bool
+    {
+
+        if (!$validatePrice && !empty($fieldContent)) {
+           return false;
+        }else{
+            return true;
+        }
+    }
+
 }
 

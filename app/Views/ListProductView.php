@@ -1,4 +1,4 @@
-<?php use App\HelperMethods; ?>
+<?php use App\HelperMethods; var_dump($_SESSION); ?>
 <!doctype html>
 <html lang="en">
 <head>
