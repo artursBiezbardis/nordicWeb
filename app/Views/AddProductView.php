@@ -1,6 +1,7 @@
 <?php
 
 use App\HelperMethods;
+use App\Models\Product;
 use App\TypeModelCollection;
 use App\Views\Js\Js;
 use App\Views\classNoneTypeFields\classNoneTypeFields;
@@ -43,33 +44,20 @@ var_dump($_SESSION);
 <div class="flex-grow">
     <form action="/product/add" method="post" id="form" onsubmit="productTypeInputValidationJS();">
         <div class="mx-16 pt-16 w-96">
-            <div class="flex justify-between pb-5">
-                <label class="mr-20" for="sku">SKU</label>
-                <div>
-                    <?php $value = $_SESSION['sku']['value'] ?? '';
-                    echo empty($_SESSION) || $_SESSION['sku']['validStatus'] ? '<input  class="border border-black" value="' . $value . '" type="text" id="sku" name="sku" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="sku" name="sku" />'?>
-                    <?php echo !empty($_SESSION) || !$_SESSION['sku']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['sku']['errorMessage'] . '</span>' : '' ?>
+            <?php
+            $noneTypeNames = Product::$noneTypeFieldsDescription;
+            foreach ($noneTypeNames as $name => $item):
+                !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? $padding='pb-0': $padding='pb-5'
+                ?>
+                <div class="flex justify-between <?php echo $padding ?>">
+                    <?php echo '<label class="mr-20f float-left" for="' . $item . '">' . $name . '</label>'; ?>
+                    <div>
+                        <?php $value = $_SESSION[$item]['value'] ?? ''; ?>
+                        <?php echo empty($_SESSION) || $_SESSION[$item]['validStatus'] ? '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
+                        <?php echo !empty($_SESSION) || !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-between pb-5">
-                <label for="name">Name</label>
-                <div>
-                    <?php $value = $_SESSION['name']['value'] ?? '';
-                    echo empty($_SESSION) || $_SESSION['name']['validStatus'] ? '<input class="border border-black" value="' . $value . '" type="text" id="name" name="name" />' : '<input  class="border-2 border-red-600" value="' . $value . '" type="text" id="name" name="name" />'?>
-                    <?php echo !empty($_SESSION) || !$_SESSION['name']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['name']['errorMessage'] . '</span>' : '' ?>
-                </div>
-            </div>
-            <div class="flex justify-between pb-5">
-                <label for="price">Price ($)</label>
-                <div>
-                    <?php $value = $_SESSION['price']['value'] ?? '';
-                    echo empty($_SESSION) || $_SESSION['price']['validStatus'] ? '<input class="border border-black" value="' . $value . '" type="text" id="price" name="price" />' : '<input class="border-2 border-red-600" value="' . $value . '" type="text" id="price" name="price" />'?>
-                    <?php echo !empty($_SESSION) || !$_SESSION['price']['validStatus'] ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION['price']['errorMessage'] . '</span>' : '' ?>
-                </div>
-            </div>
-
-            <input type="hidden" id="description"/>
-
+            <?php endforeach ?>
             <div class="flex justify-between pb-5">
                 <label for="selectType">Type Switcher</label>
                 <select class="border border-black" name="select" id="selectType" onchange="productTypeSwitchJS();"

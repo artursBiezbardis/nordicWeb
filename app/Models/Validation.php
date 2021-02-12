@@ -7,10 +7,9 @@ namespace App\Models;
 class Validation
 
 {
-
-    public function skuValidation($value, $searchSkuInDB): array
+    public function skuValidation(string $value, $searchSkuInDB): array
     {
-        if ($value === null) {
+        if ($value === '') {
             $errorMessage = 'Enter value in field!';
             $validStatus = false;
         } elseif (is_numeric($searchSkuInDB)) {
@@ -26,11 +25,11 @@ class Validation
         return ['value' => $value,'errorMessage' => $errorMessage, 'validStatus' => $validStatus];
     }
 
-    public function nameValidation($value): array
+    public function nameValidation(string $value): array
     {
         $errorMessage = '';
         $validStatus = true;
-        if ($value ===null) {
+        if ($value === '') {
             $errorMessage = 'Enter value in field!';
             $validStatus = false;
         }
@@ -38,13 +37,13 @@ class Validation
         return ['errorMessage' => $errorMessage, 'validStatus' => $validStatus, 'value' => $value];
     }
 
-    public function priceValidation($value): array
+    public function priceValidation(string $value): array
     {
         $errorMessage = '';
         $validStatus = true;
         $validPattern = '/^\d+(\.\d{1,2})?$/';
 
-        if ($value === null) {
+        if ($value === '') {
             $errorMessage = 'Enter value in field!';
             $validStatus = false;
         } elseif (preg_match($validPattern, $value) == '0') {

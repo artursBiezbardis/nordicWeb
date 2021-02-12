@@ -14,9 +14,9 @@ class AddProductService
     public function saveProduct(): void
     {
         header('Location:/product/add');
-        $_POST = array_filter($_POST);
+
         $validation= new Validation();
-        $_SESSION['skuExistInDB']=(new CheckIfSkuExistInDBRepository())->execute($_POST['sku']);
+        $_SESSION['skuExistInDB']=(new CheckIfSkuExistInDBRepository())->execute(strval($_POST['sku']));
         $_SESSION['sku'] = $validation->skuValidation(strval($_POST['sku']),$_SESSION['skuExistInDB']);
         $_SESSION['name'] = $validation->nameValidation(strval($_POST['name']));
         $_SESSION['price'] = $validation->priceValidation(strval($_POST['price']));
