@@ -52,8 +52,8 @@ $generatingJs = new Js();
                     <div>
                         <?php $value = $_SESSION[$item]['value'] ?? ''; ?>
                         <?php echo empty($_SESSION) || $_SESSION[$item]['validStatus']
-                            ? '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />'
-                            : '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
+                            ? '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" required/>'
+                            : '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" required/>' ?>
                         <?php echo !empty($_SESSION) || !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus']
                             ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
                     </div>
