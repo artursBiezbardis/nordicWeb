@@ -14,33 +14,39 @@ class AddProductService
     {
         header('Location:/product/add');
         session_unset();
-        $typeModels=(new TypeModelCollection())->getTypeModels();
+        $typeModels = (new TypeModelCollection())->getTypeModels();
         $validation = new Validation();
-        $_SESSION['skuExistInDB'] = (new CheckIfSkuExistInDBRepository())->execute(strval($_POST['sku']));
-        $_SESSION['sku'] = $validation->skuValidation(strval($_POST['sku']), $_SESSION['skuExistInDB']);
+        $_SESSION['sku'] = $validation->skuValidation(
+            strval($_POST['sku']), (new CheckIfSkuExistInDBRepository())->execute($_POST['sku']));
         $_SESSION['name'] = $validation->nameValidation(strval($_POST['name']));
         $_SESSION['price'] = $validation->priceValidation(strval($_POST['price']));
         $_SESSION['select'] = $_POST['select'];
-        $typeValidation=$typeModels[$_POST['select']]->descriptionFormValues();
-        foreach ($typeValidation as $key=>$value){
-            $_SESSION[$key] = $validation->attributeFieldValidation($_POST[$key]);
-        }
-            if ($_SESSION['sku']['validStatus'] && $_SESSION['name']['validStatus'] && $_SESSION['price']['validStatus']) {
-                header('Location:/product/list');
-                $_POST = array_filter($_POST);
-                $descriptionValueArray = array_diff_key($_POST,
-                    array_flip(['sku', 'name', 'price', 'select']));
-                foreach ((new TypeModelCollection())->getTypeModels() as $key => $model) {
-                    if ($_POST['select'] == $key) {
-                        $_POST['description'] = $model->formattingProductDescription($descriptionValueArray);
-                    }
-                }
-                $model = (new Product($_POST['sku'], $_POST['name'],
-                    (int)($_POST['price'] * 100), $_POST['description']));
+        $typeValidation = $typeModels[$_POST['select']]->descriptionFormValues();
+        $validateDescription = [];
 
-                (new AddProductRepository())->save($model);
-            }
+        foreach ($typeValidation as $key => $value) {
+            $_SESSION[$key] = $validation->attributeFieldValidation($_POST[$key]);
+            $validateDescription[$key] = $_SESSION[$key]['validStatus'];
         }
+        if ($_SESSION['sku']['validStatus'] && $_SESSION['name']['validStatus']
+            && $_SESSION['price']['validStatus'] && !in_array(false, $validateDescription)) {
+
+            header('Location:/product/list');
+            $_POST = array_filter($_POST);
+            $descriptionValueArray = array_diff_key($_POST,
+                array_flip(['sku', 'name', 'price', 'select']));
+
+            foreach ((new TypeModelCollection())->getTypeModels() as $key => $model) {
+                if ($_POST['select'] == $key) {
+                    $_POST['description'] = $model->formattingProductDescription($descriptionValueArray);
+                }
+            }
+            $model = (new Product($_POST['sku'], $_POST['name'],
+                (int)($_POST['price'] * 100), $_POST['description']));
+
+            (new AddProductRepository())->save($model);
+        }
+    }
 
 
 }

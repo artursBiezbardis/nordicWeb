@@ -87,22 +87,23 @@ class Js
 
     public function switchPositionForInputFields(ProductTypeInterface $model): string
     {
+        $helpers = new HelperMethods();
         $jsVar = '';
         foreach ($model->descriptionFormValues() as $input) {
-            $input = HelperMethods::getPropertyNameForHtmlInput($input);
-            $forId = HelperMethods::formatTypeForHtmlInput($model, $input);
+            $input = $helpers->getPropertyNameForHtmlInput($input);
+            $forId = $helpers->formatTypeForHtmlInput($model, $input);
 
             $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'const ' .
                 strtolower($input) . ' = document.forms["form"]["'
                 . $forId . '"].value;';
         }
         foreach ($model->descriptionFormValues() as $input) {
-            $input = HelperMethods::getPropertyNameForHtmlInput($input);
+            $input = $helpers->getPropertyNameForHtmlInput($input);
             $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'let string' . $input . ' = ' .
                 strtolower($input) . '.toString();';
         }
         foreach ($model->descriptionFormValues() as $input) {
-            $input = HelperMethods::getPropertyNameForHtmlInput($input);
+            $input = $helpers->getPropertyNameForHtmlInput($input);
             $jsVar .= "\n" . "\t" . "\t" . "\t" . "\t" . 'if( string' . $input . ' === "" ) {' . "\n" .
                 "\t" . "\t" . "\t" . "\t" . 'alert("' . $input . ' must be filled");' .
                 "\n" . "\t" . "\t" . "\t" . "\t" . 'event.preventDefault();' .

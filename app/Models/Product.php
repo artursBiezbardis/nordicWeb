@@ -8,7 +8,8 @@ class Product
     private $name;
     private $price;
     private $description;
-    static $noneTypeFieldsDescription=['SKU'=>'sku','Name'=>'name','Price ($)'=>'price'];
+
+    const NONE_TYPE_DESCRIPTION = ['SKU' => 'sku', 'Name' => 'name', 'Price ($)' => 'price'];
 
     public function __construct(string $sku, string $name, int $price, string $description)
     {

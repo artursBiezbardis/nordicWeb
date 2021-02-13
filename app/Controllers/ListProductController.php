@@ -7,9 +7,9 @@ use App\Services\ListProductService;
 
 class ListProductController
 {
-    public function listProducts(): int
+    public function showListProducts(): int
     {
-        $productList = (new ListProductService())->crateList();
+        $productList = (new ListProductService())->createList();
 
         return require_once __DIR__ . '/../Views/ListProductView.php';
     }

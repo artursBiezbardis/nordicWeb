@@ -16,7 +16,7 @@ class DVD implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['dvdSize'=>'Size (Mb)'];
+        return ['dvdSize' => 'Size (Mb)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string

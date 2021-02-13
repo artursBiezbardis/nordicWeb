@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-
 namespace App\Models;
 
+use App\Repositories\CheckIfSkuExistInDBRepository;
 
 class Validation
 
@@ -15,14 +15,14 @@ class Validation
         } elseif (is_numeric($searchSkuInDB)) {
             $errorMessage = 'Sku number exist in Data Base';
             $validStatus = false;
-        }else{
+        } else {
 
             $errorMessage = '';
             $validStatus = true;
         }
 
 
-        return ['value' => $value,'errorMessage' => $errorMessage, 'validStatus' => $validStatus];
+        return ['value' => $value, 'errorMessage' => $errorMessage, 'validStatus' => $validStatus];
     }
 
     public function nameValidation(string $value): array
@@ -58,11 +58,11 @@ class Validation
     {
         $errorMessage = '';
         $validStatus = true;
-        $float=(float)$value;
+        $float = (float)$value;
         if ($value === '') {
             $errorMessage = 'Enter value in field!';
             $validStatus = false;
-        }elseif (!is_numeric($value)|| $float <0) {
+        } elseif (!is_numeric($value) || $float < 0) {
             $errorMessage = 'This value must be positive number!';
             $validStatus = false;
         }

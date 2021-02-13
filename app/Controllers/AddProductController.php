@@ -11,7 +11,7 @@ class AddProductController
         return require_once __DIR__ . '/../Views/AddProductView.php';
     }
 
-    public function addProduct(): void
+    public function saveProduct(): void
     {
         (new AddProductService())->saveProduct();
 

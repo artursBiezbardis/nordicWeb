@@ -7,7 +7,7 @@ use App\Repositories\ListProductRepository;
 
 class ListProductService
 {
-    function crateList(): array
+    function createList(): array
     {
         session_unset();
 

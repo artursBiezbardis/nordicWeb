@@ -17,7 +17,7 @@ class Book implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['bookWeight'=>'Weight (KG)'];
+        return ['bookWeight' => 'Weight (KG)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string

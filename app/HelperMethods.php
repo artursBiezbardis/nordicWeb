@@ -8,20 +8,6 @@ use App\Models\ProductTypeInterface;
 
 class HelperMethods
 {
-    static function typeCollection(string $dir): array
-    {
-        $productTypes = [];
-        $files = scandir($dir);
-        $index = 0;
-        foreach ($files as $file) {
-            $file = explode('.', $file);
-            if ($file[1] == 'php') {
-                $productTypes[$index] = $file[0];
-                $index++;
-            }
-        }
-        return $productTypes;
-    }
 
     public function formatTypeForHtmlInput(ProductTypeInterface $model, string $input): string
     {
@@ -42,24 +28,6 @@ class HelperMethods
         return number_format(($value / 100), 2, '.', ' ');
     }
 
-    public function validatePrice($price):bool
-    {
-        $pattern='/^\d+(\.\d{1,2})?$/';
-        if (preg_match($pattern, $price) == '0') {
-           return false;
-        }else{
-            return true;
-        }
-    }
-    public function validatePriceField($validatePrice,$fieldContent):bool
-    {
-
-        if (!$validatePrice && !empty($fieldContent)) {
-           return false;
-        }else{
-            return true;
-        }
-    }
 
 }
 

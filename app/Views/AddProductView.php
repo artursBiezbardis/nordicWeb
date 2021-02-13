@@ -43,7 +43,7 @@ $generatingJs = new Js();
     <form action="/product/add" method="post" id="form" onsubmit="productTypeInputValidationJS();">
         <div class="mx-16 pt-16 w-96">
             <?php
-            $noneTypeNames = Product::$noneTypeFieldsDescription;
+            $noneTypeNames = Product::NONE_TYPE_DESCRIPTION;
             foreach ($noneTypeNames as $name => $item):
                 !empty($_SESSION[$item]) && !$_SESSION[$item]['validStatus'] ? $padding = 'pb-0' : $padding = 'pb-5'
                 ?>
@@ -73,7 +73,7 @@ $generatingJs = new Js();
         </div>
         <div style="width: 450px" class="mx-16 pt-16">
             <?php foreach ($typeModels as $model):
-                $modelName=$model->getProductType()?>
+                $modelName = $model->getProductType() ?>
                 <div id="<?php echo $modelName ?>"
                      class="p-5 border border-black box-border rounded-sm hidden">
                     <?php foreach ($model->descriptionFormValues() as $item => $input):
@@ -82,10 +82,10 @@ $generatingJs = new Js();
                         <label for="<?php echo $item ?>"><?php echo $input ?></label>
                         <div>
                             <?php $value = $_SESSION[$item]['value'] ?? ''; ?>
-                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus'])&& !$_SESSION[$item]['validStatus']
-                            ? '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />'
-                            : '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
-                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus'])&& !$_SESSION[$item]['validStatus']
+                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus']) && !$_SESSION[$item]['validStatus']
+                                ? '<input  class="border border-red-600" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />'
+                                : '<input  class="border border-black" value="' . $value . '" type="text" id="' . $item . '" name="' . $item . '" />' ?>
+                            <?php echo !empty($_SESSION) && isset($_SESSION[$item]['validStatus']) && !$_SESSION[$item]['validStatus']
                                 ? '<span class="flow-root font-light text-sm text-red-600">' . $_SESSION[$item]['errorMessage'] . '</span>' : '' ?>
                         </div>
                     </div>

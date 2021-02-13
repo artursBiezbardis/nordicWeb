@@ -18,7 +18,7 @@ class Furniture implements ProductTypeInterface
 
     public function descriptionFormValues(): array
     {
-        return ['furnitureHeight'=>'Height (CM)', 'furnitureWidth'=>'Width (CM)', 'furnitureLength'=>'Length (CM)'];
+        return ['furnitureHeight' => 'Height (CM)', 'furnitureWidth' => 'Width (CM)', 'furnitureLength' => 'Length (CM)'];
     }
 
     public function formattingProductDescription(array $arrayOfDescriptionValues): string

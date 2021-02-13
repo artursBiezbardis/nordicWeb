@@ -3,12 +3,10 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $namespace = '\App\Controllers\\';
 
     $r->addRoute('GET', '/product/add', $namespace . 'AddProductController@showAddProductForm');
-    $r->addRoute('POST', '/product/add', $namespace . 'AddProductController@addProduct');
-    //$r->addRoute('', '/product/add', $namespace . 'AddProductController@update');
+    $r->addRoute('POST', '/product/add', $namespace . 'AddProductController@saveProduct');
 
-    $r->addRoute('GET', '/product/list', $namespace . 'ListProductController@listProducts');
+    $r->addRoute('GET', '/product/list', $namespace . 'ListProductController@showListProducts');
     $r->addRoute('POST', '/product/list', $namespace . 'ListProductController@massDelete');
-
 });
 
 $httpMethod = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
@@ -32,8 +30,6 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         [$controller, $method] = explode('@', $routeInfo[1]);
         $vars = $routeInfo[2];
-
         (new $controller)->$method($vars);
-
         break;
 }

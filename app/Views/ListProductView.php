@@ -22,7 +22,7 @@
 
         <div class="flex justify-between">
             <div class="pb-2 pl-5">
-                <button form="formList" id="massDeleteButton" onsubmit="return confirm('Are you sure?')"
+                <button form="formList" id="massDeleteButton"
                         class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow shadow-md"
                         role="button">mass delete
                 </button>
@@ -31,7 +31,7 @@
 </header>
 <form action="/product/list" method="post" id="formList" onsubmit="">
 
-    <div class="px-16 flex justify-center flex-wrap content-around ">
+    <div class="px-16 flex justify-center flex-wrap content-around">
         <?php foreach ($productList as $product): ?>
             <div class="text-sm box-border border border-black w-52 h-40 rounded-sm  mx-3  my-5">
                 <input class="mt-2 ml-2" type="checkbox" id="<?php echo $product->getSku(); ?>"
@@ -54,8 +54,8 @@
     </div>
 </form>
 
-<div class="flex-grow "></div>
-<footer class="flex justify-center border-1 border-black border-t mx-16 ">
+<div class="flex-grow"></div>
+<footer class="flex justify-center border-1 border-black border-t mx-16">
     <a class="py-10">Scandiweb test assignment</a>
 </footer>
 <script>
