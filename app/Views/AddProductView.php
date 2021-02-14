@@ -33,9 +33,11 @@ $generatingJs = new Js();
         </div>
 
         <div class="pl-5">
-            <a href="http://localhost:8000/product/list"
+            <form action="/product/list" method="get">
+            <button
                class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
-               role="button">cancel</a>
+               role="button">cancel</button>
+            </form>
         </div>
     </div>
 </header>

@@ -15,9 +15,11 @@
     </div>
     <div class="mr-5 flex justify-between">
         <div class="pl-5">
-            <a href="http://localhost:8000/product/add"
+            <form action="/product/add" method="get">
+            <button
                class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
-               role="button">add</a>
+            >add</button>
+            </form>
         </div>
 
         <div class="flex justify-between">
