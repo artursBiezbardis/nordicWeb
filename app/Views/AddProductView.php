@@ -34,9 +34,11 @@ $generatingJs = new Js();
 
         <div class="pl-5">
             <form action="/product/list" method="get">
-            <button
-               class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
-               role="button">cancel</button>
+                <button
+                        class="flex items-center block text-black p-0.5 px-2 bg-white hover:bg-gray-100 border border-black border-1 shadow-md"
+                        role="button">
+                    cancel
+                </button>
             </form>
         </div>
     </div>
